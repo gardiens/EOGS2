@@ -13,8 +13,6 @@ Official implementation for
 [EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](http://arxiv.org/abs/2306.08045)
 
 
-[🌍  Project webpage](https://mezzelfo.github.io/EOGS/)
-
 [🌍  Project webpage](https://gardiens.github.io/EOGS2/)
 
  [ 📦 Dataset download](https://github.com/gardiens/EOGS2/releases/download/data/data.zip)
