@@ -10,13 +10,14 @@
 
 Official implementation for
 <br>
-[EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](https://arxiv.org/abs/2511.16542)
+[EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](http://arxiv.org/abs/2306.08045)
 
-[![arXiv](https://img.shields.io/badge/arxiv-2306.08045-b31b1b.svg)](https://arxiv.org/pdf/2511.16542)
-[![Project page](https://img.shields.io/badge/Project_page-8A2BE2)](https://gardiens.github.io/eogs2)
 
+[🌍  Project webpage](https://mezzelfo.github.io/EOGS/)
 
 [🌍  Project webpage](https://gardiens.github.io/EOGS2/)
+
+ [ 📦 Dataset download](https://github.com/gardiens/EOGS2/releases/download/data/data.zip)
 ```
 @article{bournez2025eogsearthobservationgaussian,
   title={EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering},
@@ -165,8 +166,8 @@ python src/gaussiansplatting/full_eval_pan.py experiments=eogsplus mode=onlyMSI 
 
 ## 💳  Credits
 
-- This project was built using the [original EOGS github ](https://github.com/mezzelfo/EOGS/tree/master).
-- The documentation was heavily inspired by the [SuperPoint Transformers github](https://github.com/drprojects/superpoint_transformer)
+- This project was built using the [original EOGS repo ](https://github.com/mezzelfo/EOGS/tree/master).
+- The documentation was heavily inspired by the [SuperPoint Transformers repo](https://github.com/drprojects/superpoint_transformer)
 
 
 <br>
