@@ -1,0 +1,10 @@
+defaults:
+  - main_affine.yaml
+output_expe_path: ${basepath}/output/${expname}
+expname: test_cc/IARPA_001_PNEWS_train_to_test_cc_average_522_
+
+video_prefix: video
+
+idx: 0
+
+angle_number: 200

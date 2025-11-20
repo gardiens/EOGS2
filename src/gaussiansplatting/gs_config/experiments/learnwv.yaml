@@ -1,0 +1,13 @@
+# @package _global_
+defaults:
+  - override /mode: onlyMSI
+  - override /dataset: pansharpen.yaml
+  - override /model: learn_wv.yaml
+expname: eogs_learnwv_${scene}
+debug: False
+numiterations: 40000
+run_tsdf: False
+scene: IARPA_001
+
+rpc_type: rpc_raw #!
+

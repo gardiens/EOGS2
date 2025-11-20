@@ -1,0 +1,4 @@
+use_early_stopping: False
+patience: 600 # the patience will be multiplied by tb_log_interval #!
+operator: min
+metric_name: photometric # check L1 ( min ) photometric (min) pan_psnr(max)

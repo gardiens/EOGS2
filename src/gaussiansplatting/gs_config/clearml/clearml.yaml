@@ -1,0 +1,6 @@
+task_name: ${expname}
+project_name: EOGS
+resume_clearml: False
+tags:
+  []
+  # - test

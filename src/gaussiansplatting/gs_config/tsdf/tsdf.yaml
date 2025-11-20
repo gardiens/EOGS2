@@ -1,0 +1,21 @@
+scene_name: ${scene}
+vox_size: 0.5
+trunc_margin_fact: 4.0
+name_altitude: ${eval:"'flowmatched_altitude' if ${optimization.flowmatching.apply_flowmatching} else 'altitude'"}
+slanted_altitude_dir: ${path.basepath}/output/${expname}/train_opNone/ours_${numiterations}/${name_altitude}
+
+output_dir: ${path.basepath}/output/${expname}/test_opNone/ours_${numiterations}/tsdf
+gt_dir: ${path.data_folder}/Truth
+
+affine_models_json_path: ${path.affine_model_path}/${scene}_${prefix}/affine_models.json
+train_txt_split_path: ${path.affine_model_path}/${scene}_${prefix}/train.txt
+
+ref_key: pan
+
+task_name: ${expname}
+resume_clearml: ${clearml.resume_clearml}
+
+model_path: ${model.model_path}
+
+export_mesh: False # requires mcube
+output_mesh_path: ${path.basepath}/output/${expname}/test_opNone/ours_${numiterations}/output_mesh/tsdf_mesh.obj

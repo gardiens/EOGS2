@@ -1,0 +1,18 @@
+# @package _global_
+defaults:
+  - override /mode: 3PAN
+  - override /dataset: pan.yaml
+  - override /optimization/early_stopping: l_photom.yaml
+  - override /optimization/flowmatching: raft_small.yaml
+
+scene: IARPA_001
+
+expname: eogsplus_${rpc_type}_${scene}
+debug: False
+
+numiterations: 40000
+
+run_tsdf: True
+skip_train: False
+
+rpc_type: rpc_ba

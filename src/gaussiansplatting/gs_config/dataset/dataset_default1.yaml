@@ -1,0 +1,11 @@
+# @package dataset
+images_pan_path: ${path.data_folder}/images/pan/${scene}
+
+images_msi_path: ${path.data_folder}/images/msi/${scene}
+
+rescaler_name: clamper
+
+# scene: ??
+
+initialize_pcd:
+  input_ply_name: null # input_pcd  # if not null,we load the ply

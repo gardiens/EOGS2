@@ -1,0 +1,16 @@
+# @package _global_
+defaults:
+  - override /mode: onlyMSI
+  - override /dataset: pansharpen.yaml
+
+scene: IARPA_001
+
+expname: eogs_${rpc_type}_${scene}
+debug: False
+
+numiterations: 5000
+optimization:
+  opacity_reset_interval: 999999999999999
+run_tsdf: False
+
+rpc_type: rpc_ba

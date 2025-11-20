@@ -1,0 +1,4 @@
+defaults:
+  - _self_
+  - flowmatching: default_fm.yaml
+  - early_stopping: default_es.yaml

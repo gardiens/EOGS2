@@ -1,0 +1,221 @@
+defaults:
+  - _self_
+  - path: default_path.yaml
+
+  - hydra_log/no_hydra #remove hydra log, useless w.r.t to the previous script.
+  - clearml: clearml.yaml
+  - optimization: default.yaml
+  - model: default.yaml
+  - dataset: pansharpen.yaml
+  - mode: mode_default.yaml
+  - eval: dsm.yaml # This is used for rendering
+  - tsdf: tsdf.yaml #used for sign distance function
+  - experiments: baseogs.yaml
+
+expname: ""
+seed: 1337
+# usual parameters:
+debug: False
+scene: IARPA_001
+debug_from: -1
+detect_anomaly: False
+test_iterations:
+save_iterations:
+  - ${optimization.iterations}
+  - 50001
+  - 30001
+  - 70001
+quiet: False
+checkpoint_iterations: [] # list of int that will be used to save the checkpoint
+start_checkpoint: Null # should be a string pointing to the right file
+
+numiterations: 10000
+
+pipeline:
+  convert_SHs_python: False
+  compute_cov3D_python: False
+  debug: ${debug}
+  antialiasing: False
+  require_radii: ${eval:"not ${optimization.only_prune}"}
+prefix: ${dataset.prefix}
+model:
+  sh_degree: 0
+  need_rescale: ${eval:"False if 'SYNEW' in '${model.images_msi_path}' else True"} # if the data come from a SYNEW you have to rescale it !
+  source_path: ${path.affine_model_path}/${scene}_${prefix}
+  model_path: ${path.basepath}/output/${expname}
+  images_msi_path: ${dataset.images_msi_path}
+  images_pan_path: ${dataset.images_pan_path}
+  resolution: -1
+  white_background: False
+  data_device: cuda
+  eval: True
+  scene_name: ${scene}
+  target_density: 0.13
+  scale_factor_z: 1
+  opacity_init_value: 0.01
+  camera_params:
+    use_cc: true
+    use_exposure: False
+    learn_wv_transform: False
+    learn_wv_only_lastparam: True
+    pan_images: Null
+    use_shadow: True
+    use_only_rot: False # been removed from the implementation for now.
+  msi_to_pan:
+    # _target_: scene.msi_to_pan.transf_msi_to_pan.MSI_TO_PAN
+    kernel_size: 1
+    msi_channels: 3
+    pan_channels: 1
+    remove_sigm: True
+    init_value: True
+    use_avgpool: False
+    name: ${mode.msi_to_pan_name}
+  share_color_correction: True
+  share_worldview_transform: False
+  transient_params:
+    use_transient: False
+    init_value: 0.01
+  weird_pan_setup: False
+  load_pan: True
+  load_msi: True
+  repeat_gt: ${mode.repeat_gt}
+  rescaler_name: ${dataset.rescaler_name} # standard_rescaler
+  initialize_pcd:
+    input_ply_name: ${dataset.initialize_pcd.input_ply_name}
+  train_to_test_cc_converter: average
+optimization:
+  iterations: ${numiterations}
+  load_pan: ${mode.load_pan}
+  load_msi: ${mode.load_msi}
+  position_lr_init: 0.00016
+  position_lr_final: 0.0000016
+  position_lr_delay_mult: 0.01
+  position_lr_max_steps: 30000
+  feature_lr: 0.0025
+  opacity_lr: 0.05
+  scaling_lr: 0.005
+  rotation_lr: 0.001
+  percent_dense: 0.01
+  lambda_dssim: 0.2
+  densification_strategy:
+    densify_from_iter: 500
+    densification_interval: 100
+    densify_grad_threshold: 2e-6
+  opacity_reset_interval: 3000 #-1 #3000 # was the initial value
+  iterend_opacity_reset_interval: 999999999
+  iterend_L_opacity: 99999999
+  only_prune: True
+  densify_until_iter: ${numiterations}
+
+  random_background: true
+  copy_background_firschan: False
+  optimizer_type: default
+  min_opacity: -6.0
+  # EOGS specific parameters
+  iterstart_shadowmapping: 1000
+  color_reset_iterations: 9999999999
+  # loss terms starting iterations
+  iterstart_L_opacity: -1
+  iterstart_L_opacity_radii: 999999
+  iterstart_L_flowmatch: 99999999
+  iterend_L_flowmatch: 9999999
+  iterend_L_opacity_radii: 99999999999
+  iterstart_L_sun_resample: 9999999999
+  iterstart_L_new_resample: 1000
+  iterstart_L_TV_altitude: 9999999999
+  iterstart_L_erank: 9999999999
+  iterstart_L_nll: 9999999999
+  iterstart_L_accumulated_opacity: 9999999999
+  # iterstart_Lpan: 100
+  iterstart_Lgradient_pan: 999999999
+  # iterstart_L_pansharp: -1 #!
+  apply_pansharp: False
+  itr_apply_flowmatching_to_affine: 99999999
+  # start training parameters:
+  iterstart_learn_wv_transform: 1500
+  freeze_start_msitopan_params: True
+  iterstart_learn_msitopan_params: 5000
+
+  # loss terms weights
+  w_L_photometric: 1
+  w_L_opacity: 0.10
+  w_L_opacity_radii: 0
+  w_L_sun_altitude_resample: 0.01
+  w_L_sun_rgb_resample: 0.10
+  w_L_new_altitude_resample: 0.01
+  w_L_new_rgb_resample: 0.10
+  w_L_TV_altitude: 0
+  w_L_erank: 0.0
+  w_L_nll: 0
+  w_L_translucentshadows: 0.01
+  w_L_accumulated_opacity: 0.0
+  w_Lpan: 0.1
+  w_Lgradient_pan: 0.1
+  virtual_camera_extent: 0.01
+  w_L_pansharp: 0.1 #!
+  w_L_flowmatch: 0.1
+  # LR scheduler
+  camera_lr: 0.01
+  random_camera:
+    randomcamera_render_type: rawrender
+    use_gt: False
+  msi_pan_lr: 0.01 #1e-4
+  flowmatching: # actual code in the flowmatching config file
+    apply_flowmatching: False
+    max_value_flow: 5 #20
+    flowmatch_msi: True
+    flowmatch_pan: True
+    perform_cst_displacement: False
+    mode: upscale
+    model_name: large
+    criteria: max_value_flow
+    iterend_flowmatching: 9999999
+  iterstart_flowmatching: 1500
+  pansharp_cfg:
+    method: brovey
+
+  # early_stopping: # pushed to optimization/early_stopping
+  #   use_early_stopping: False
+  #   patience: 600 # the patience will be multiplied by tb_log_interval #!
+  #   operator: max
+  #   metric_name: pan_psnr # check L1 ( min ) photometric (min)
+  normalize_colors_before_saving: False
+gs_logger: # Really just logging GS things
+  tb_log_interval: 10
+  pan_log_interval: 9000 #${eval:"int('${numiterations}') -1"} #it has to be a divisible of both tb_log intervall and pan_log_interval
+  # big_testing_iterations: ${eval:"[1000,4999]+[k for k in range(${optimization.opacity_reset_interval}-1,100000,${optimization.opacity_reset_interval})]"}
+  #   big_testing_iterations:
+  # - 99999999
+  # - 999999999
+  big_testing_iterations: ${eval:"[int(${numiterations}/5*k) for k in range(1,5)]+[${numiterations}-1]"}
+
+  dsm:
+    aoi_id: ${eval.aoi_id}
+    enable_vis_mask: ${eval.enable_vis_mask}
+    use_another_computer_filter_tree: True
+    filter_tree: ${eval.filter_tree}
+    gt_dir: ${path.data_folder}/Truth
+# rendering params
+skip_train: False
+skip_test: False
+res: 0.5
+iteration: -1
+return_whole_name: True
+
+mode: # Bad name but specify here if you want to load msi/pan and what is the underlying conversion
+  load_pan: True
+  load_msi: True
+  msi_to_pan_name: fixed
+  repeat_gt: False
+dataset:
+  images_pan_path: ${path.data_folder}/images/msi
+  images_msi_path: ${path.data_folder}/images/pan
+  prefix: ${dataset.mode_name}_${rpc_type}
+  mode_name: pan # available pansharpen
+  initialize_pcd:
+    input_ply_name: null # if not null,we load the ply
+
+rpc_type: rpc_ba #available rpc_raw
+run_tsdf: True
+run_rendering: True
+run_train: True

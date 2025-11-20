@@ -1,0 +1,7 @@
+defaults:
+  - default_fm.yaml
+  - _self_
+apply_flowmatching: True
+perform_cst_displacement: True
+model_name: small
+# perform betterw with onlypan

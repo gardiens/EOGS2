@@ -1,0 +1,7 @@
+hydra-core
+clearml
+pytest
+pre-commit
+matplotlib
+tqdm
+notebook

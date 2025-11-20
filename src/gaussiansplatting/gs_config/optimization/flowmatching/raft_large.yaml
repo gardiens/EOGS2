@@ -1,0 +1,6 @@
+defaults:
+  - default_fm.yaml
+  - _self_
+apply_flowmatching: True
+perform_cst_displacement: False
+model_name: large

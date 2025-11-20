@@ -1,0 +1,21 @@
+defaults:
+  - train.yaml
+  - _self_
+  - override eval: dsm.yaml
+  - override tsdf: tsdf.yaml
+skip_train: False
+skip_test: False
+quiet: False
+opacity_treshold: Null
+res: 0.5
+# iteration: ${numiterations}
+iteration: -1
+rendering_cfg:
+  scene: ${scene}
+return_whole_name: True
+# resume previous clearml experiments !
+clearml:
+  resume_clearml: True
+# E:\mnt\bdisk\bournez\EOGS\EOGS\output\smallitr_expe_63077_IARPA_003_itr_200\test_opNone\ours_200\final
+run_tsdf: True
+run_rendering: True

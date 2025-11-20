@@ -1,0 +1,12 @@
+defaults:
+  - rendering.yaml
+  - _self_
+
+opacity_treshold: null
+
+prefix_video: video
+
+video_name: nadir_pov
+output_video_path: ${path.basepath}/output/video/${video_name}
+
+cfg_idx: 0

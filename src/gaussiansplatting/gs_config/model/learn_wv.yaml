@@ -1,0 +1,7 @@
+defaults:
+  - default.yaml
+  - _self_
+
+camera_params:
+  learn_wv_transform: True
+  learn_wv_only_lastparam: True

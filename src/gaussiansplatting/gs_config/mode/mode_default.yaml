@@ -1,0 +1,4 @@
+load_pan: True
+load_msi: True
+msi_to_pan_name: fixed
+repeat_gt: False

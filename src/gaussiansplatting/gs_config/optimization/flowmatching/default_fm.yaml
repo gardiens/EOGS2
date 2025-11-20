@@ -1,0 +1,9 @@
+apply_flowmatching: False
+max_value_flow: 5 #20
+flowmatch_msi: True
+flowmatch_pan: True
+perform_cst_displacement: True
+mode: upscale
+model_name: small
+iterend_flowmatching: 9999999
+num_flow_updates: 12

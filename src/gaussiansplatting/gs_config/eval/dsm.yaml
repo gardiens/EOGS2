@@ -1,0 +1,22 @@
+# get the MAE with this function
+half_dsm_path: ${path.basepath}/output/${expname}/test_opNone/ours_${numiterations}/dsm/
+
+out_dir: ${path.basepath}/output/${expname}/test_opNone/ours_${numiterations}/rdsm
+aoi_id: ${scene}
+
+task_name: ${expname}
+resume_clearml: ${clearml.resume_clearml}
+scene_name: ${scene}
+
+gt_dir: ${path.data_folder}/Truth
+enable_vis_mask: False
+filter_tree: False # technical details
+
+debug: ${debug}
+
+nadir_name: Nadir.iio
+model_path: ${model.model_path}
+
+pred_dsm_path: null # ${eval.half_dsm_path}${eval.nadir_name} # use it if you want to provide a custom pred_dsm_path
+
+prefix: ""

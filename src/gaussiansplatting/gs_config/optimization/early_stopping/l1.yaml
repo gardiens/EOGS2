@@ -1,0 +1,7 @@
+defaults:
+  - default_es.yaml
+  - _self_
+
+use_early_stopping: True
+operator: min
+metric_name: L1

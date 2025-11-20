@@ -1,0 +1,27 @@
+defaults:
+  - _self_
+  - hydra_log/no_hydra #remove hydra log, useless w.r.t to the previous script.
+  - main_cfg: default.yaml
+
+basepath: ${oc.env:PROJECT_ROOT}
+
+data_folder: "${basepath}/data"
+root_dir: "${data_folder}/rpcs/${rpc_type}"
+dataset_folder: "${basepath}/scripts/dataset_creation"
+dataset_destination_path: ${dataset_folder}/affine_models/
+traintest_dir: "${data_folder}/train_test_split"
+save_data: True
+scene_name: IARPA_001
+
+msi_dir: ${data_folder}/images/msi
+pansharp_dir: ${data_folder}/images/pansharpen
+pan_dir: ${data_folder}/images/pan
+
+mode: ??
+rgb_dir: ${eval:"msi_dir if mode == 'pan' else pansharp_dir"}
+rpc_type: rpc_ba # available rpc_raw
+
+prefix: ${mode}_${rpc_type}
+change_resolution: True
+
+path_ply: null

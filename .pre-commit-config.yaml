@@ -1,0 +1,69 @@
+default_language_version:
+  python: python3
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: debug-statements
+      # list of supported hooks: https://pre-commit.com/hooks.html
+      - id: trailing-whitespace
+      #- id: end-of-file-fixer
+      #- id: check-docstring-first
+      #- id: check-yaml
+
+      - id: detect-private-key
+      #- id: check-executables-have-shebangs
+      - id: check-toml
+      - id: check-case-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=3000"]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    # Ruff version.
+    rev: v0.6.7
+    hooks:
+      - id: ruff
+        args: [--select=F401, --fix-only]
+      # Run the formatter.
+      - id: ruff-format
+
+  # python docstring formatting
+  - repo: https://github.com/myint/docformatter
+    rev: v1.7.5
+    hooks:
+      - id: docformatter
+        args: [--in-place, --wrap-summaries=99, --wrap-descriptions=99]
+
+  # yaml formatting
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v2.7.1
+    hooks:
+      - id: prettier
+        types: [yaml]
+
+  # jupyter notebook cell output clearing
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.7.1
+    hooks:
+      - id: nbstripout
+  - repo: local
+    hooks:
+      - id: git-diff
+        name: git diff (name-only)
+        entry: git diff --exit-code --name-only
+        language: system
+        pass_filenames: false
+        always_run: true
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: "v1.11.2" # Use the sha / tag you want to point at
+  #   hooks:
+  #     - id: mypy
+
+  # # jupyter notebook linting
+  # - repo: https://github.com/nbQA-dev/nbQA
+  #   rev: 1.8.7
+  #   hooks:
+  #     - id: nbqa-black
+  #       args: ["--line-length=99"]
+  #     - id: nbqa-isort
+  #       args: ["--profile=black"]

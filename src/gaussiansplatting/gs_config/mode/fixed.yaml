@@ -1,0 +1,6 @@
+defaults:
+  - mode_default
+
+load_pan: True
+load_msi: True
+msi_to_pan_name: fixed

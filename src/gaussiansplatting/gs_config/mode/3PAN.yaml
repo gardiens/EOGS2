@@ -1,0 +1,7 @@
+defaults:
+  - mode_default
+
+load_pan: True
+load_msi: False
+msi_to_pan_name: identity
+repeat_gt: True

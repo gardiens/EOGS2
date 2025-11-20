@@ -1,0 +1,10 @@
+# @package dataset
+
+defaults:
+  - /dataset/dataset_default1.yaml
+
+images_pan_path: ${path.data_folder}/images/pan/${scene}
+
+images_msi_path: ${path.data_folder}/images/pansharpen/${scene}
+
+mode_name: pan

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <style>
+ .abstract-big {
+  font-size: 1.25rem; /* increase as needed */
+  line-height: 1.6;
+}
+
+ .comparison-caption {
+  position:absolute;
+  bottom:10px;
+  padding:6px 10px;
+  background:rgba(0,0,0,0.6);
+  color:white;
+  font-size:14px;
+  border-radius:4px;
+  opacity:0;
+  transition:opacity 0.25s;
+  pointer-events:none;
+}
+    .big-caption {
+    font-size: 1.5rem !important;   /* adjust as needed */
+    line-height: 1.4;
+  }
+  .schematic-caption {
+  font-size: 1.3rem !important;   /* adjust as needed */
+  line-height: 1.5;
+}
+
+img-comparison-slider:hover .comparison-caption {
+  opacity:1;
+}
+
+.caption-left {
+  left:10px;
+}
+
+.caption-right {
+  right:10px;
+}
+</style>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering">
+  <meta name="keywords" content="EOGS,3D Gaussian Splatting, Earth observation">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> EOGS ++ </title>
+
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <!-- <link rel="stylesheet" href="./static/css/fontawesome.all.min.css"> -->
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <!-- <script defer src="./static/js/fontawesome.all.min.js"></script> -->
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@7/dist/styles.css">
+<script src="https://cdn.jsdelivr.net/npm/img-comparison-slider@7"></script>
+
+<!-- <link rel="stylesheet" href="static/dics/dics_original.css">
+<script src="static/dics/dics_original.js"></script> -->
+
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://gardiens.vercel.app/">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+       <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title"> EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct
+Panchromatic Rendering </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://gardiens.vercel.app/">Pierrick Bournez</a><sup>1</sup>,</span>
+            <span class="author-block">
+             <a href="mailto:luca.savant@polito.it"> Luca Savant Aira</a> <sup>2</sup>,</span>
+            <span class="author-block">
+            <a href="mailto:thibaud.ehret@polytechnique.edu"> Thibaud Ehret</a><sup>3</sup>,
+            </span>
+            <span class="author-block">
+            <a href="mailto:gabriele.facciolo@ens-paris-saclay.fr"> Gabriele Facciolo</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+
+            <span class="author-block"><sup>1</sup>Universite Paris-Saclay, CNRS, ENS Paris-Saclay, Centre Borelli, 91190, Gif-sur-Yvette, France</span>
+            <span class="author-block"><sup>2</sup>AMIAD, Pôle Recherche, France</span>
+
+             <span class="author-block"><sup>3</sup> Politecnico di Torino, Corso Duca degli Abruzzi, 24, 10129 Torino TO, Italia </span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://gitlab-student.centralesupelec.fr/test-groupe/EOGS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://gitlab-student.centralesupelec.fr/test-groupe/EOGS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="https://gitlab-student.centralesupelec.fr/test-groupe/EOGS"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link.
+              <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width has-text-centered">
+
+        <figure>
+          <table style="margin-left:auto; margin-right:auto;">
+            <tr>
+              <td style="padding:5px;">
+                <img src="static/images/first_images/gt_pan_image.png" style="width:100%; max-width:350px;">
+                <div class="is-size-6">Training panchromatic image</div>
+              </td>
+              <td style="padding:5px;">
+                <img src="static/images/first_images/final_pan_image.png" style="width:100%; max-width:350px;">
+                <div class="is-size-6">Rendered panchromatic image</div>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:5px;">
+                <img src="static/images/first_images/gt_rdsm_image_viridis2.png" style="width:100%; max-width:350px;">
+                <div class="is-size-6">GT Lidar DSM</div>
+              </td>
+              <td style="padding:5px;">
+                <img src="static/images/first_images/final_rdsm_image_viridis2.png" style="width:100%; max-width:350px;">
+                <div class="is-size-6">Rendered DSM</div>
+              </td>
+            </tr>
+          </table>
+
+          <figcaption class="is-size-6" style="margin-top:0.5rem;">
+            <em>Qualitative result of the EOGS++ pipeline.</em>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="section">
+<!-- Abstract. -->
+  <div class="container" style="max-width:1400px;">
+    <h2 class="title is-3 has-text-centered">Abstract</h2>
+
+    <div class="content has-text-justified abstract-big">
+  <p>
+    Recently, 3D Gaussian Splatting has emerged as an efficient alternative to NeRF for Earth observation, delivering competitive reconstruction quality with substantially reduced training times. In this work, we introduce <span class="dnerf"><b>EOGS++</b></span>, an enhanced extension of the Earth Observation Gaussian Splatting framework designed to <b>operate directly on raw high-resolution panchromatic imagery</b>, thereby removing the need for external preprocessing.
+  </p>
+  <p>
+    By leveraging <b>optical flow</b>, we embed bundle adjustment directly into the training process, avoiding dependence on external optimization tools while improving camera pose estimation. We further incorporate several refinements, such as <b> early stopping and TSDF-based post-processing</b>—that jointly yield sharper reconstructions and improved geometric accuracy.
+  </p>
+  <p>
+    Experiments on the IARPA 2016 and DFC2019 datasets demonstrate that <span class="dnerf"><b>EOGS++</b></span> achieves state-of-the-art performance in both reconstruction quality and computational efficiency. It surpasses the original EOGS and NeRF-based baselines while preserving the speed advantages of Gaussian Splatting. Notably, our method reduces the mean MAE on building structures from 1.33 m to 1.19 m, highlighting its effectiveness for satellite-based 3D reconstruction.
+  </p>
+</div>
+    </div>
+  </div>
+</section>
+<!--/ Abstract. -->
+<!--  -->
+<div class="columns is-centered has-text-centered">
+  <div class="column is-four-fifths">
+
+    <img-comparison-slider style="width:100%; max-width:900px; margin:auto; position:relative;">
+
+      <img slot="first" src="static/images/viewer/IARPA_002_whole_baseogs_samemax.png" style="width:100%;">
+      <div class="comparison-caption caption-left" slot="first">EOGS</div>
+
+      <img slot="second" src="static/images/viewer/IARPA_002_eogsplus.png" style="width:100%;">
+      <div class="comparison-caption caption-right" slot="second">EOGS ++</div>
+
+    </img-comparison-slider>
+
+  <div class="is-size-4 big-caption" style="margin-top:0.7rem;">
+    compared DSM between EOGS and EOGS ++ on scene IARPA 002
+  </div>
+
+  </div>
+</div>
+<!--/ Paper video. -->
+
+
+
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+         <h2 class="title is-3 has-text-centered"> Method</h2>
+
+        <div class="content has-text-justified">
+
+          <figure class="has-text-centered">
+            <img src="static/images/method/training_pipeline.jpg" alt="Method Overview" style="max-width:100%;">
+              <figcaption class="is-size-4 ">
+
+              <em>Schematic overview of the proposed training pipeline. From the 3D Gaussian primitives, an image is rendered. The rendered image is then aligned with the training observation using an optical flow algorithm, after which the model is trained accordingly.</em>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered"> Visual Results</h2>
+
+
+        <div class="content has-text-justified">
+
+          <div class="has-text-centered" style="margin-top:1.5rem;">
+  <table style="margin-left:auto; margin-right:auto; width:100%; max-width:900px;">
+    <tr>
+      <th></th>
+      <th class="is-size-6">IARPA 002</th>
+      <th class="is-size-6">IARPA 003</th>
+    </tr>
+
+    <!-- None -->
+    <tr>
+      <td class="is-size-6" style="padding:5px;">None</td>
+      <td><img src="static/images/visual_results/output_rdsm_rpcraw_IARPA_002_viridis_samemax.png" style="width:100%;"></td>
+      <td><img src="static/images/visual_results/output_rdsm_rpcraw_IARPA_003_viridis_samemax.png" style="width:100%;"></td>
+    </tr>
+
+    <!-- Learn wv -->
+    <tr>
+      <td class="is-size-6" style="padding:5px;">Learn wv</td>
+      <td><img src="static/images/visual_results/output_rdsm_rpcrawlearnwv_IARPA_002_viridis_samemax.png" style="width:100%;"></td>
+      <td><img src="static/images/visual_results/output_rdsm_rpcrawlearnwv_IARPA_003_viridis_samemax.png" style="width:100%;"></td>
+    </tr>
+
+    <!-- Optical flow -->
+    <tr>
+      <td class="is-size-6" style="padding:5px;">Optical flow</td>
+      <td><img src="static/images/visual_results/output_rdsm_eogsoftsdf_IARPA_002_viridis_samemax.png" style="width:100%;"></td>
+      <td><img src="static/images/visual_results/output_rdsm_eogsoftsdf_IARPA_003_viridis_samemax.png" style="width:100%;"></td>
+    </tr>
+
+    <!-- External BA -->
+    <tr>
+      <td class="is-size-6" style="padding:5px;">External B.A.</td>
+      <td><img src="static/images/visual_results/output_rdsm_baseeogsrepeatgt_IARPA_002_viridis_samemax.png" style="width:100%;"></td>
+      <td><img src="static/images/visual_results/output_rdsm_baseeogsrepeatgt_IARPA_003_viridis_samemax.png" style="width:100%;"></td>
+    </tr>
+
+    <!-- GT Lidar DSM -->
+    <tr>
+      <td class="is-size-6" style="padding:5px;">GT Lidar DSM</td>
+      <td><img src="static/images/visual_results/gt_rdsm_image_viridis_samemax_IARPA_002.png" style="width:100%;"></td>
+      <td><img src="static/images/visual_results/gt_rdsm_image_viridis_samemax_IARPA_003.png" style="width:100%;"></td>
+    </tr>
+  </table>
+
+  <p class="is-size-4" style="margin-top:0.7rem;">
+    <em>Qualitative comparison of the different methods for correcting camera-pointing errors on the IARPA 002 and IARPA 003 scenes.</em>
+  </p>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered">Video comparison</h2>
+
+    <div class="content has-text-centered">
+
+
+
+<img-comparison-slider style="width:100%; max-width:900px; margin:auto; position:relative;">
+
+  <img slot="first" src="static/images/viewer/baseeogs_IARPA_001_average_video_0.gif" style="width:100%;">
+  <div class="comparison-caption caption-left" slot="first"> EOGS</div>
+
+  <img slot="second" src="static/images/viewer/best_eogs_IARPA001_0.gif" style="width:100%;">
+  <div class="comparison-caption caption-right" slot="second">EOGS ++</div>
+
+</img-comparison-slider>
+
+    </div>.
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+
+    <!-- Related Links. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3 has-text-centered"> Related links</h2>
+
+
+        <div class="content has-text-justified">
+          <p>
+            Several recent works and repositories explore complementary approaches to satellite-based 3D reconstruction.
+          </p>
+          <p>
+            <a href="https://rogermm14.github.io/eonerf/">EoNerf</a> proposes an Earth-observation–oriented adaptation of NeRF, focusing on improved geometric consistency across multi-view satellite imagery.
+          </p>
+          <p>
+            <a href="https://mezzelfo.github.io/EOGS/">EOGS</a> introduces a Gaussian Splatting framework tailored to satellite data, providing efficient reconstruction pipelines for large-scale scenes.
+          </p>
+          <p>
+            These resources offer valuable complementary perspectives and highlight the rapidly evolving landscape of neural reconstruction methods for Earth observation.
+
+
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Related Links. -->
+
+  </div>
+</section>
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{cella2025resqdrone,
+  title={ResQDrone: Autonomous Indoor Quadcopter for Multi-Layered Mapping in Crisis and Disaster Management Scenarios},
+  author={Cella, Marco and Biber, J{\"u}rgen and Bournez, Pierrick and Salzinger, Jules and Widhalm, Verena and Vultaggio, Francesco and d’Apolito, Francesco and Bruckm{\"u}ller, Felix and Sulzbachner, Christoph and Fanta-Jende, Phillipp},
+  journal={The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences},
+  volume={48},
+  pages={47--54},
+  year={2025},
+  publisher={Copernicus GmbH}
+}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <!-- <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a> -->
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website template is borrowed from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

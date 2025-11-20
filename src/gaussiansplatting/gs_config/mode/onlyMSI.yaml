@@ -1,0 +1,6 @@
+defaults:
+  - mode_default
+
+load_pan: False
+load_msi: True
+# msi_to_pan_name: only_one_channel

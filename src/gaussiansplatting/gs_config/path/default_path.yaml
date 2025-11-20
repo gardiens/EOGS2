@@ -1,0 +1,7 @@
+# path to root directory
+# this requires PROJECT_ROOT environment variable to exist
+basepath: ${oc.env:PROJECT_ROOT}
+data_folder: ${path.basepath}/data
+
+# path of the affine model camera:
+affine_model_path: ${path.basepath}/scripts/dataset_creation/affine_models

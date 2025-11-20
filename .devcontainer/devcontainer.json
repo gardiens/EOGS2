@@ -1,0 +1,61 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.217.1/containers/ubuntu
+{
+	"name": "Container for ",
+	"build": {
+		"context": "..",
+		"dockerfile": "dockerfile",
+		// Update 'VARIANT' to pick an Ubuntu version: hirsute, focal, bionic
+		// Use hirsute or bionic on local arm64/Apple Silicon.
+		"args": {
+			"VARIANT": "focal",
+			"--progress": "plain"
+		},
+		"options": ["--progress=plain"]
+	},
+	"extensions": [
+		"ms-python.python",
+		"visualstudioexptteam.vscodeintellicod",
+		"njpwerner.autodocstring",
+		"gruntfuggly.todo-tree",
+		"streetsidesoftware.code-spell-checker",
+		"yzhang.markdown-all-in-one",
+		"redhat.vscode-xml",
+		"tomoki1207.pdf",
+		"ms-toolsai.jupyter",
+		"ms-vscode.cpptools",
+		"ms-vscode.cpptools-extension-pack",
+	],
+	"runArgs": [
+		"--net=host",
+		"--shm-size=32g",
+		"--privileged",
+		"-e",
+		"DISPLAY=${env:DISPLAY}",
+		"-e",
+		"QT_X11_NO_MITSHM=1",
+		"-e",
+		"XDG_RUNTIME_DIR=${env:XDG_RUNTIME_DIR}",
+		"-v",
+		"${localEnv:HOME}/.Xauthority:/root/.Xauthority:rw",
+		"-v",
+		"/tmp/.X11-unix:/tmp/.X11-unix",
+		"--env=NVIDIA_VISIBLE_DEVICES=all",
+		"--env=NVIDIA_DRIVER_CAPABILITIES=all",
+		"--env=DISPLAY",
+		"--env=QT_X11_NO_MITSHM=1",
+		"--gpus",
+		"all" // If it crash, u have to install the nvidia-container-toolkit
+	],
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "ls ; bash ",
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "pierrick",
+
+	"mounts": [
+		"source=/DATA_PATH,target=/workspaces/EOGS_dataset,type=bind,consistency=cached",
+		"source=/DATASETS_PATH/,target=/workspaces/external_datasets,type=bind,consistency=cached",
+		]
+}

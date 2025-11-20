@@ -1,0 +1,4 @@
+# @package _global_
+
+mode: pan # available msi
+rpc_type: rpc_ba # available rpc_raw
