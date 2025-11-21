@@ -10,11 +10,22 @@
 
 Official implementation for
 <br>
-[EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](http://arxiv.org/abs/2306.08045)
+[EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](https://arxiv.org/abs/2511.16542)
+
+[![arXiv](https://img.shields.io/badge/arxiv-2306.08045-b31b1b.svg)](https://arxiv.org/pdf/2511.16542)
+[![Project page](https://img.shields.io/badge/Project_page-8A2BE2)](https://gardiens.github.io/eogs2)
 
 
-[🌍  Project webpage](https://mezzelfo.github.io/EOGS/)
-
+[🌍  Project webpage](https://gardiens.github.io/EOGS2/)
+```
+@article{bournez2025eogsearthobservationgaussian,
+  title={EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering},
+  author={Bournez, Pierrick and Savant Aira, Luca and Ehret, Thibaud and Facciolo, Gabriele},
+  journal={arXiv preprint arXiv:2511.16542},
+  year={2025},
+  url={https://arxiv.org/abs/2511.16542}
+}
+```
 
 
 ## 📌  Description
@@ -66,7 +77,7 @@ bash install.sh
 
 Download the dataset from the **GitHub Release page**:
 
-➡️ https://github.com/mezzelfo/EOGS/releases/download/dataset_v01/data.zip
+➡️ https://github.com/gardiens/EOGS2/releases/download/data/data.zip
 
 Extract it into the `data` folder :
 
@@ -154,8 +165,8 @@ python src/gaussiansplatting/full_eval_pan.py experiments=eogsplus mode=onlyMSI 
 
 ## 💳  Credits
 
-- This project was built using the [original EOGS repo ](https://github.com/mezzelfo/EOGS/tree/master).
-- The documentation was heavily inspired by the [SuperPoint Transformers repo](https://github.com/drprojects/superpoint_transformer)
+- This project was built using the [original EOGS github ](https://github.com/mezzelfo/EOGS/tree/master).
+- The documentation was heavily inspired by the [SuperPoint Transformers github](https://github.com/drprojects/superpoint_transformer)
 
 
 <br>
@@ -163,15 +174,14 @@ python src/gaussiansplatting/full_eval_pan.py experiments=eogsplus mode=onlyMSI 
 ## Citing our work
 
 If your work uses all or part of the present code, please include the following a citation:
-
 ```
-@article{cella2025resqdrone,
-  title={ResQDrone: Autonomous Indoor Quadcopter for Multi-Layered Mapping in Crisis and Disaster Management Scenarios},
-  author={Cella, Marco and Biber, J{\"u}rgen and Bournez, Pierrick and Salzinger, Jules and Widhalm, Verena and Vultaggio, Francesco and d’Apolito, Francesco and Bruckm{\"u}ller, Felix and Sulzbachner, Christoph and Fanta-Jende, Phillipp},
-  journal={The International Archives of the Photogrammetry, Remote Sensing and Spatial Information Sciences},
-  volume={48},
-  pages={47--54},
+@article{bournez2025eogsearthobservationgaussian,
+  title={EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering},
+  author={Bournez, Pierrick and Savant Aira, Luca and Ehret, Thibaud and Facciolo, Gabriele},
+  journal={arXiv preprint arXiv:2511.16542},
   year={2025},
-  publisher={Copernicus GmbH}}
+  url={https://arxiv.org/abs/2511.16542}
+}
 ```
-You can find our [paper on arxiv 📄](http://arxiv.org/abs/2306.08045).
+
+You can find our [paper on arxiv 📄](https://arxiv.org/abs/2511.16542).
