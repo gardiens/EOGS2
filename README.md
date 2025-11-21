@@ -77,7 +77,7 @@ bash install.sh
 
 Download the dataset from the **GitHub Release page**:
 
-➡️ https://github.com/mezzelfo/EOGS/releases/download/dataset_v01/data.zip
+➡️ https://github.com/gardiens/EOGS2/releases/download/data/data.zip
 
 Extract it into the `data` folder :
 
