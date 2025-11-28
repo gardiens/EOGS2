@@ -26,4 +26,4 @@ hydra-core
 pytest
 omegaconf
 einops
-# PyMCubes
+PyMCubes==0.1.4
