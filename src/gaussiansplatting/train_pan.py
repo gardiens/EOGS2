@@ -1071,7 +1071,6 @@ def main(cfg: DictConfig) -> None:
 
     # Start GUI server, configure and run training
     torch.autograd.set_detect_anomaly(cfg.detect_anomaly)
-    print("the path in the cfg data folder is", cfg.path.data_folder)
     training(
         sceneparams=model,
         opt=opt,
