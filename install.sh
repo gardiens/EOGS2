@@ -5,10 +5,9 @@
 #   🧠 EOGS Project — Installer Script
 # ==============================================
 
-PROJECT_NAME=EOGS
+
 PYTHON_VERSION=3.8
 CUDA_SUPPORTED=(11.8 12.0 12.1 11.6 11.4)
-REPO_URL="git@gitlab-student.centralesupelec.fr:test-groupe/EOGS.git"
 
 echo
 echo "_____________________________________________"
@@ -17,18 +16,18 @@ echo "_____________________________________________"
 echo
 
 # ---- Detect CUDA version ----
-# echo "⭐ Detecting installed CUDA..."
-# CUDA_VERSION=$(nvcc --version | grep release | sed 's/.* release //' | sed 's/, .*//')
-# CUDA_MAJOR=$(echo ${CUDA_VERSION} | cut -d. -f1)
-# CUDA_MINOR=$(echo ${CUDA_VERSION} | cut -d. -f2)
-# if [[ ! " ${CUDA_SUPPORTED[*]} " =~ " ${CUDA_VERSION} " ]]; then
-#   echo "❌ Unsupported CUDA ${CUDA_VERSION}. Supported: ${CUDA_SUPPORTED[*]}"
-#   exit 1
-# else
-#   echo "✅ Found supported CUDA ${CUDA_VERSION}"
-# fi
+echo "⭐ Detecting installed CUDA..."
+CUDA_VERSION=$(nvcc --version | grep release | sed 's/.* release //' | sed 's/, .*//')
+CUDA_MAJOR=$(echo ${CUDA_VERSION} | cut -d. -f1)
+CUDA_MINOR=$(echo ${CUDA_VERSION} | cut -d. -f2)
+if [[ ! " ${CUDA_SUPPORTED[*]} " =~ " ${CUDA_VERSION} " ]]; then
+  echo "❌ Unsupported CUDA ${CUDA_VERSION}. Supported: ${CUDA_SUPPORTED[*]}"
+  exit 1
+else
+  echo "✅ Found supported CUDA ${CUDA_VERSION}"
+fi
 
-CUDA_VERSIon=12.1
+echo "Detected CUDA version: ${CUDA_VERSION}"
 
 
 # ---- Set libmamba solver for speed ----
@@ -54,8 +53,8 @@ echo
 echo "⭐ Installing Python dependencies..."
 
 # install with conda C++ needed dependencies
-conda install -c conda-forge libpng libwebp libtiff zlib glm ninja
-sudo apt-get install libtiff-dev libpng-dev libwebp-dev libglm-dev
+conda install -c conda-forge libpng libwebp libtiff zlib glm ninja -y 
+sudo apt-get install libtiff-dev libpng-dev libwebp-dev libglm-dev 
 
 pip install -r requirements.txt
 

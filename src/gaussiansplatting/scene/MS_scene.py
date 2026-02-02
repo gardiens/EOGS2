@@ -39,7 +39,6 @@ class MSScene(Scene):
                 name=args.train_to_test_cc_converter
             )
         )
-        print("we use the train_to_test_cc_converter ", args.train_to_test_cc_converter)
         if load_iteration:
             if load_iteration == -1:
                 self.loaded_iter = searchForMaxIteration(
@@ -75,17 +74,12 @@ class MSScene(Scene):
             }
             print("the source path is", args.source_path)
             if args.load_pan:
-                print("we have MSI and PAN images, loading MS scene info")
                 images_path = {
                     "msi": args.images_msi_path,
                     "pan": args.images_pan_path,
                 }
                 print("the images path is", images_path)
-                print(
-                    "need rescale",
-                    args.need_rescale,
-                    "should be false iif SYNEW in path ",
-                )
+                
                 scene_info: "MSSceneInfo" = readMSAffineSceneInfo(
                     path=args.source_path,
                     images_path=images_path,

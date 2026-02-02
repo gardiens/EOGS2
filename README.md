@@ -73,6 +73,7 @@ bash install.sh
 ## 🚀  Usage
 
 ### 📦 Datasets
+We use the same dataset as **[Eo-NeRF](https://rogermm14.github.io/eonerf/)**. In addition we provide the raw Panchromatic images and low-resolution MSI images.
 
 Download the dataset from the **GitHub Release page**:
 
@@ -81,7 +82,7 @@ Download the dataset from the **GitHub Release page**:
 Extract it into the `data` folder :
 
 ```bash
-unzip -q data.zip -d data
+unzip data.zip "data/*" -d . 
 ```
 
 
@@ -135,8 +136,9 @@ Some example:
 # Train EOGS++ on MSI data with raw RPC cameras (scene: JAX_068)
 python src/gaussiansplatting/full_eval_pan.py experiments=eogsplus.yaml mode=onlyMSI rpc_type=rpc_raw scene=JAX_068
 
-# Train EOGS++ on PAN data with bundle-adjusted RPC cameras (scene: IARPA_001)
+# Train EOGS++ only on  PAN data with bundle-adjusted RPC cameras (scene: IARPA_001)
 python src/gaussiansplatting/full_eval_pan.py experiments=eogsplus.yaml mode=3PAN rpc_type=rpc_ba scene=IARPA_001
+
 ```
 
 To reproduce all experiments from the paper:

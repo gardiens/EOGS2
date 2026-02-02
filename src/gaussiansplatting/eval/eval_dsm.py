@@ -62,8 +62,8 @@ def dsm_pointwise_diff(
     pred_rdsm = apply_shift(pred_dsm, *transform)
     h = min(pred_rdsm.shape[0], gt_dsm.shape[0])
     w = min(pred_rdsm.shape[1], gt_dsm.shape[1])
-    max_gt_alt = gt_dsm.max()
-    min_gt_alt = gt_dsm.min()
+    max_gt_alt = np.nanmax(gt_dsm)
+    min_gt_alt = np.nanmin(gt_dsm)
     pred_rdsm = np.clip(pred_rdsm, min_gt_alt - 10, max_gt_alt + 10)
     diff = pred_rdsm[:h, :w] - gt_dsm[:h, :w]
     return diff, pred_rdsm
@@ -97,7 +97,6 @@ def load_mae_things(
     if os.path.exists(os.path.join(gt_dir, "{}_DSM.txt".format(aoi_id))):
         # Mostly DFC2019 scenes
         gt_roi_path = os.path.join(gt_dir, "{}_DSM.txt".format(aoi_id))
-        print("Using gt_roi_path", gt_roi_path)
         gt_roi_metadata = np.loadtxt(gt_roi_path)
     else:
         # mostly IARPA scenes
@@ -193,7 +192,6 @@ def save_dsm_diff(out_dir, aoi_id, mae, profile, rdsm, diff, prefix: str = ""):
             png_out_dir, "{}_rdsm_abs_diff.png".format(aoi_id)
         )
         os.makedirs(os.path.dirname(abs_diff_png_path), exist_ok=True)
-        print(" on passe par la?")
         fig, ax = plt.subplots(figsize=(5, 5))
 
         im = ax.imshow(abs_diff, cmap="viridis")

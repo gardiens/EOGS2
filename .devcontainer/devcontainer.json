@@ -52,10 +52,10 @@
 	// Use 'postCreateCommand' to run commands after the container is created.
 	// "postCreateCommand": "ls ; bash ",
 	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "pierrick",
+	"remoteUser": "root"
 
-	"mounts": [
-		"source=/DATA_PATH,target=/workspaces/EOGS_dataset,type=bind,consistency=cached",
-		"source=/DATASETS_PATH/,target=/workspaces/external_datasets,type=bind,consistency=cached",
-		]
+	// "mounts": [
+	// 	"source=/DATA_PATH,target=/workspaces/EOGS_dataset,type=bind,consistency=cached",
+	// 	"source=/DATASETS_PATH/,target=/workspaces/external_datasets,type=bind,consistency=cached",
+	// 	]
 }
