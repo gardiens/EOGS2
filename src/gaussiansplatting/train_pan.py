@@ -105,7 +105,6 @@ def training(
     start_checkpoint,
     debug_from,
 ):
-    print("the gt_dir is", GS_loger.dsm.gt_dir)
     mae_computer = Mae_Computer(
         gt_dir=GS_loger.dsm.gt_dir,
         aoi_id=GS_loger.dsm.aoi_id,
@@ -360,13 +359,15 @@ def training(
                     ).mean() > opt.flowmatching.max_value_flow and (
                         iteration < 2000 or iteration % 1000 == 0
                     ):
-                        print(
-                            "for cam image",
-                            cam.image_name,
-                            cam.image_type,
-                            " we have a huge predicted flows, it will perhaps crash?",
-                            " we discard this image and continue",
-                        )
+                        # print(
+                        #     "for cam image",
+                        #     cam.image_name,
+                        #     cam.image_type,
+                        #     " we have a huge predicted flows?",
+                        #     " we discard this image and continue",
+                        # )
+                        gt_image=gt_image 
+                        image=image
             if iteration > opt.iterstart_L_accumulated_opacity:  # not used yet
                 L_accumulated_opacity = accumulatedopacity_l(
                     accumulated_opacity_render=accumulated_opacity_render
@@ -728,7 +729,6 @@ def training(
                 and iteration % opt.opacity_reset_interval == 0
                 and iteration < opt.iterend_opacity_reset_interval
             ):
-                print("WE RESET OPACITY WHAT GONNA HAPPEN?")
                 gaussians.reset_opacity()
             if iteration == opt.color_reset_iterations:
                 # do a fancy color reset
@@ -1058,10 +1058,7 @@ def main(cfg: DictConfig) -> None:
             name_connect_cfg="whole train cfg",
         )
         # task.connect(cfg,name="test_train")
-    else:
-        print(
-            " you probably are in debug mode"
-        )
+        
     print("Optimizing " + cfg.model.model_path)
     if not cfg.run_train:
         print("run_train is set to False, exiting...")

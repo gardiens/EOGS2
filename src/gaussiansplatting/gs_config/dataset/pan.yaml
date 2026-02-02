@@ -5,6 +5,6 @@ defaults:
 
 images_pan_path: ${path.data_folder}/images/pan/${scene}
 
-images_msi_path: ${path.data_folder}/images/pansharpen/${scene}
+images_msi_path: ${path.data_folder}/images/msi/${scene}
 
 mode_name: pan

@@ -6,7 +6,7 @@ setuptools
 wheel
 packaging
 matplotlib
-numpy
+numpy<2.0
 rpcm
 scikit-learn
 pyproj
