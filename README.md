@@ -8,9 +8,9 @@
 [![python](https://img.shields.io/badge/-Python_3.8+-blue?logo=python&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![pytorch](https://img.shields.io/badge/PyTorch_2.2+-ee4c2c?logo=pytorch&logoColor=white)](https://pytorch.org/get-started/locally/)
 
-Official implementation for
+Official implementation for the ISPRS 2026 paper 
 <br>
-[EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](https://arxiv.org/abs/2511.16542)
+[EOGS++: Earth Observation Gaussian Splatting with Internal Camera Refinement and Direct Panchromatic Rendering ](https://isprs-annals.copernicus.org/articles/XI-2-2026/217/2026/)
 
 
 [🌍  Project webpage](https://gardiens.github.io/EOGS2/)
