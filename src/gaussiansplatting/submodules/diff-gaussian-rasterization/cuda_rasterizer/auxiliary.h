@@ -173,6 +173,7 @@ __forceinline__ __device__ bool in_frustum(int idx,
 	// 	}
 	// 	return false;
 	// }
+	return true;
 }
 
 #define CHECK_CUDA(A, debug) \
